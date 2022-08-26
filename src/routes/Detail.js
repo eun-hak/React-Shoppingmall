@@ -1,6 +1,25 @@
-function Detail() {
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import styled from "styled-components";
+
+function Detail(props) {
+  useEffect(() => {
+    setTimeout(() => {
+      setTimeClick(false);
+    }, 2000);
+  });
+
+  let [TimeClick, setTimeClick] = useState(true);
+  let { id } = useParams();
+
+  let value = props.shoes.find((item) => item.id == id);
+  console.log(value);
   return (
     <div className="container">
+      {TimeClick == true ? (
+        <div className="alert alert-warning">2초이내 구매시 할인</div>
+      ) : null}
+
       <div className="row">
         <div className="col-md-6">
           <img
@@ -9,9 +28,9 @@ function Detail() {
           />
         </div>
         <div className="col-md-6">
-          <h4 className="pt-5">상품명</h4>
-          <p>상품설명</p>
-          <p>120000원</p>
+          <h4 className="pt-5">{value.title}</h4>
+          <p>{props.shoes[id].content}</p>
+          <p>{props.shoes[id].price}</p>
           <button className="btn btn-danger">주문하기</button>
         </div>
       </div>

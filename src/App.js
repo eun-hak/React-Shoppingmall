@@ -72,15 +72,40 @@ function App() {
           }
         />
         <Route
-          path="/detail"
+          path="/detail/:id"
           element={
             <>
-              <Detail></Detail>
+              <Detail shoes={shoes}></Detail>
             </>
           }
         />
-        <Route path="*" element={<div>없는 페이지 입니다</div>} />
+        <Route path="/about" element={<About />}>
+          <Route path="member" element={<div>멤버임</div>} />
+          <Route path="location" element={<About />} />
+        </Route>
+
+        <Route path="/event" element={<Event />}>
+          <Route path="one" element={<div>첫주문 양배추즙</div>} />
+          <Route path="two" element={<div>생일기념 쿠폰</div>} />
+        </Route>
       </Routes>
+    </div>
+  );
+}
+
+function Event() {
+  return (
+    <div>
+      <h4>오늘의 이벤트!</h4>
+      <Outlet></Outlet>
+    </div>
+  );
+}
+function About() {
+  return (
+    <div>
+      <h4>회사정보임</h4>
+      <Outlet></Outlet>
     </div>
   );
 }
