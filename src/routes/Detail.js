@@ -8,8 +8,13 @@ function Detail(props) {
       setTimeClick(false);
     }, 2000);
   });
-
-  let [TimeClick, setTimeClick] = useState(true);
+  let [num, setNum] = useState("");
+  useEffect(() => {
+    if (isNaN(num) == true) {
+      alert("그러지마세요");
+    }
+  }, [num]);
+  let [TimeClick, setTimeClick] = useState("");
   let { id } = useParams();
 
   let value = props.shoes.find((item) => item.id == id);
@@ -28,6 +33,12 @@ function Detail(props) {
           />
         </div>
         <div className="col-md-6">
+          <input
+            onChange
+            {...(e) => {
+              setNum(e.target.value);
+            }}
+          />
           <h4 className="pt-5">{value.title}</h4>
           <p>{props.shoes[id].content}</p>
           <p>{props.shoes[id].price}</p>
