@@ -3,6 +3,15 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Nav, Tab } from "react-bootstrap";
 function Detail(props) {
+  let [fade2, setFade2] = useState("");
+
+  useEffect(() => {
+    setFade2("end");
+    return () => {
+      setFade2("");
+    };
+  }, []);
+
   let [탭, 탭변경] = useState(0);
   useEffect(() => {
     setTimeout(() => {
@@ -21,65 +30,67 @@ function Detail(props) {
   let value = props.shoes.find((item) => item.id == id);
   console.log(value);
   return (
-    <div className="container">
-      {TimeClick == true ? (
-        <div className="alert alert-warning">2초이내 구매시 할인</div>
-      ) : null}
-      <input
-        onChange={(e) => {
-          setNum(e.target.value);
-        }}
-      />
-      <div className="row">
-        <div className="col-md-6">
-          <img
-            src="https://codingapple1.github.io/shop/shoes1.jpg"
-            width="100%"
-          />
+    <div className={"start " + fade2}>
+      <div className="container">
+        {TimeClick == true ? (
+          <div className="alert alert-warning">2초이내 구매시 할인</div>
+        ) : null}
+        <input
+          onChange={(e) => {
+            setNum(e.target.value);
+          }}
+        />
+        <div className="row">
+          <div className="col-md-6">
+            <img
+              src="https://codingapple1.github.io/shop/shoes1.jpg"
+              width="100%"
+            />
+          </div>
+          <div className="col-md-6">
+            <h4 className="pt-5">{value.title}</h4>
+            <p>{props.shoes[id].content}</p>
+            <p>{props.shoes[id].price}</p>
+            <button className="btn btn-danger">주문하기</button>
+          </div>
         </div>
-        <div className="col-md-6">
-          <h4 className="pt-5">{value.title}</h4>
-          <p>{props.shoes[id].content}</p>
-          <p>{props.shoes[id].price}</p>
-          <button className="btn btn-danger">주문하기</button>
-        </div>
-      </div>
-      <div>
-        <Nav variant="tabs" defaultActiveKey="link0">
-          <Nav.Item>
-            <Nav.Link
-              onClick={() => {
-                탭변경(0);
-              }}
-              eventKey="link0"
-            >
-              버튼0
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link
-              onClick={() => {
-                탭변경(1);
-              }}
-              eventKey="link1"
-            >
-              버튼1
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link
-              onClick={() => {
-                탭변경(2);
-              }}
-              eventKey="link2"
-            >
-              버튼2
-            </Nav.Link>
-          </Nav.Item>
-        </Nav>
-        <div>{탭}</div>
+        <div>
+          <Nav variant="tabs" defaultActiveKey="link0">
+            <Nav.Item>
+              <Nav.Link
+                onClick={() => {
+                  탭변경(0);
+                }}
+                eventKey="link0"
+              >
+                버튼0
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link
+                onClick={() => {
+                  탭변경(1);
+                }}
+                eventKey="link1"
+              >
+                버튼1
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link
+                onClick={() => {
+                  탭변경(2);
+                }}
+                eventKey="link2"
+              >
+                버튼2
+              </Nav.Link>
+            </Nav.Item>
+          </Nav>
+          <div>{탭}</div>
 
-        <TabContent 탭={탭} />
+          <TabContent 탭={탭} />
+        </div>
       </div>
     </div>
   );
