@@ -7,8 +7,10 @@ import data from "./data.js";
 import { useState } from "react";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import { Detail } from "./routes/Detail.js";
+import axios from "axios";
 function App() {
-  let [shoes] = useState(data);
+  let [shoes, setShoes] = useState(data);
+
   let navigate = useNavigate();
   return (
     <div className="App">
@@ -68,6 +70,26 @@ function App() {
             <Shoes3 /> */}
                 </div>
               </div>
+
+              <button
+                onClick={() => {
+                  axios
+                    .get("https://codingapple1.github.io/shop/data2.json")
+                    .then((결과) => {
+                      let shoes2 = [...shoes];
+                      shoes2.push(...결과.data);
+
+                      setShoes(shoes2);
+
+                      console.log(결과.data);
+                    })
+                    .catch(() => {
+                      console.log("실패 ㅜ");
+                    });
+                }}
+              >
+                버튼
+              </button>
             </>
           }
         />
