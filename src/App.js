@@ -8,9 +8,11 @@ import { useState } from "react";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import { Detail } from "./routes/Detail.js";
 import axios from "axios";
+import Cart from "./routes/Cart.js";
+
 function App() {
   let [shoes, setShoes] = useState(data);
-
+  let [재고] = useState([10, 11, 12]);
   let navigate = useNavigate();
   return (
     <div className="App">
@@ -110,6 +112,15 @@ function App() {
           <Route path="one" element={<div>첫주문 양배추즙</div>} />
           <Route path="two" element={<div>생일기념 쿠폰</div>} />
         </Route>
+
+        <Route
+          path="/cart"
+          element={
+            <div>
+              <Cart></Cart>
+            </div>
+          }
+        />
       </Routes>
     </div>
   );
