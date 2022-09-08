@@ -87,9 +87,8 @@ function Detail(props) {
               </Nav.Link>
             </Nav.Item>
           </Nav>
-          <div>{탭}</div>
 
-          <TabContent 탭={탭} />
+          <TabContent 탭={탭} shoes={props.shoes} />
         </div>
       </div>
     </div>
@@ -103,7 +102,7 @@ function Detail(props) {
 
 function TabContent(props) {
   if (props.탭 === 0) {
-    return <div>내용1</div>;
+    return <div>{props.shoes[0].title}</div>;
   } else if (props.탭 === 1) {
     return <div>내용2</div>;
   } else if (props.탭 === 2) {
