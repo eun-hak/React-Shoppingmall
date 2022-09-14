@@ -126,6 +126,7 @@ function App() {
   );
 }
 
+// 이벤트 컴포넌트
 function Event() {
   return (
     <div>
